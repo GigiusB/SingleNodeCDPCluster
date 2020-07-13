@@ -42,8 +42,12 @@ case "$1" in
             ;;
         gcp)
             ;;
+        hetzner)
+            echo "server ntp1.hetzner.de prefer iburst minpoll 4 maxpoll 4" >> /etc/chrony.conf
+            systemctl restart chronyd
+            ;;
         *)
-            echo $"Usage: $0 {aws|azure|gcp} template-file [docker-device]"
+            echo $"Usage: $0 {aws|azure|gcp|hetzner} template-file [docker-device]"
             echo $"example: ./setup.sh azure templates/essential.json"
             echo $"example: ./setup.sh aws template/cml.json /dev/xvdb"
             exit 1
